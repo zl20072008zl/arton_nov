@@ -1,0 +1,40 @@
+import { BaseEntity } from './../../shared';
+
+export class Receipt implements BaseEntity {
+    constructor(
+        public id?: number,
+        public createdDate?: any,
+        public updatedDate?: any,
+        public message?: string,
+        public complete?: string,
+        public cardType?: string,
+        public txnNumber?: string,
+        public receiptId?: string,
+        public corporateCard?: string,
+        public recurSuccess?: string,
+        public itdresponse?: string,
+        public iso?: string,
+        public isVisaDebit?: string,
+        public timedOut?: string,
+        public messageId?: string,
+        public ticket?: string,
+        public transDate?: string,
+        public cavvResultCode?: string,
+        public responseCode?: string,
+        public authCode?: string,
+        public statusCode?: string,
+        public transAmount?: string,
+        public transType?: string,
+        public nextRecurDate?: string,
+        public avsResultCode?: string,
+        public recurEndDate?: string,
+        public transTime?: string,
+        public cvdResultCode?: string,
+        public bankTotals?: string,
+        public referenceNum?: string,
+        public statusMessage?: string,
+        public recurUpdateSuccess?: string,
+        public user?: string,
+    ) {
+    }
+}

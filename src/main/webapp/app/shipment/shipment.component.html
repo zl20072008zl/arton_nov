@@ -1,0 +1,24 @@
+<div class="wizard-container">
+    <div class="card wizard-card ct-wizard-green" id="wizard">
+        <div class="wizard-header">
+            <h3>
+                Create Your Shipment<br>
+                <small></small>
+            </h3>
+        </div>
+        <ul class="nav nav-pills">
+            <li [class.active]="currentStep == i" *ngFor="let step of steps; let i = index" style="width: 20%;float: left;display: block;position: relative">
+                <a style="position: relative;display: block;padding: 10px 15px;">{{ step }}</a></li>
+        </ul>
+        <shipment-address-component *ngIf="request && request.sender && request.recipient && currentStep == 0"
+                                    [(request)]="request"
+                                    [countries]="countries"
+                                    [senderStates]="sender_states"
+        ></shipment-address-component>
+        <shipment-item-component *ngIf="request && request.parcel && currentStep == 1" [(request)]="request"></shipment-item-component>
+        <shipment-service-component *ngIf="currentStep == 2 && request && request.service" [(request)]="request"></shipment-service-component>
+        <shipment-detail-component *ngIf="currentStep == 3 && request" [(request)]="request"></shipment-detail-component>
+        <shipment-payment-component *ngIf="currentStep == 4 && request" [(request)]="request"></shipment-payment-component>
+        <shipment-label-component *ngIf="currentStep == 5 && request" [(request)]="request"></shipment-label-component>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myExpressAccountLabel">Create or edit a Express Account</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!expressAccount.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="expressAccount.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_cpUserName">Cp User Name</label>
+            <input type="text" class="form-control" name="cpUserName" id="field_cpUserName"
+                   [(ngModel)]="expressAccount.cpUserName"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_cpPassword">Cp Password</label>
+            <input type="text" class="form-control" name="cpPassword" id="field_cpPassword"
+                   [(ngModel)]="expressAccount.cpPassword"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_cpMailedBy">Cp Mailed By</label>
+            <input type="text" class="form-control" name="cpMailedBy" id="field_cpMailedBy"
+                   [(ngModel)]="expressAccount.cpMailedBy"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_cpContractId">Cp Contract Id</label>
+            <input type="text" class="form-control" name="cpContractId" id="field_cpContractId"
+                   [(ngModel)]="expressAccount.cpContractId"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_cpMaileTo">Cp Maile To</label>
+            <input type="text" class="form-control" name="cpMaileTo" id="field_cpMaileTo"
+                   [(ngModel)]="expressAccount.cpMaileTo"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_upsUserId">Ups User Id</label>
+            <input type="text" class="form-control" name="upsUserId" id="field_upsUserId"
+                   [(ngModel)]="expressAccount.upsUserId"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_upsPassword">Ups Password</label>
+            <input type="text" class="form-control" name="upsPassword" id="field_upsPassword"
+                   [(ngModel)]="expressAccount.upsPassword"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_upsAccessLicenseNumber">Ups Access License Number</label>
+            <input type="text" class="form-control" name="upsAccessLicenseNumber" id="field_upsAccessLicenseNumber"
+                   [(ngModel)]="expressAccount.upsAccessLicenseNumber"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_upsAccountNumber">Ups Account Number</label>
+            <input type="text" class="form-control" name="upsAccountNumber" id="field_upsAccountNumber"
+                   [(ngModel)]="expressAccount.upsAccountNumber"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_fedexAccountNumber">Fedex Account Number</label>
+            <input type="text" class="form-control" name="fedexAccountNumber" id="field_fedexAccountNumber"
+                   [(ngModel)]="expressAccount.fedexAccountNumber"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_fedexMeterNumber">Fedex Meter Number</label>
+            <input type="text" class="form-control" name="fedexMeterNumber" id="field_fedexMeterNumber"
+                   [(ngModel)]="expressAccount.fedexMeterNumber"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_fedexKey">Fedex Key</label>
+            <input type="text" class="form-control" name="fedexKey" id="field_fedexKey"
+                   [(ngModel)]="expressAccount.fedexKey"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_fedexPassword">Fedex Password</label>
+            <input type="text" class="form-control" name="fedexPassword" id="field_fedexPassword"
+                   [(ngModel)]="expressAccount.fedexPassword"  />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

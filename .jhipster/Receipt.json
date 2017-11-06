@@ -1,0 +1,139 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "createdDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "updatedDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "message",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "complete",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "cardType",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "txnNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "receiptId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "corporateCard",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "recurSuccess",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "itdresponse",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "iso",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "isVisaDebit",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "timedOut",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "messageId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "ticket",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "transDate",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "cavvResultCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "responseCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "authCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "statusCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "transAmount",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "transType",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "nextRecurDate",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "avsResultCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "recurEndDate",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "transTime",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "cvdResultCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "bankTotals",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "referenceNum",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "statusMessage",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "recurUpdateSuccess",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "user",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170708194119",
+    "dto": "mapstruct",
+    "service": "no",
+    "entityTableName": "receipt",
+    "pagination": "pagination"
+}

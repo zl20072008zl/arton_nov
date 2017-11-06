@@ -1,0 +1,89 @@
+<div class="tab-content" style="margin: 20px;">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <md-card *ngIf="request.order">
+                <md-card-content>
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td>Order ID</td>
+                                <td>{{request.order.orderId}}</td>
+                            </tr>
+                            <tr>
+                                <td>Total Charges</td>
+                                <td>{{request.order.totalCharges}}</td>
+                            </tr>
+                            <tr>
+                                <td>Promotion</td>
+                                <td>
+                                    <select name="promotion" [(ngModel)]="request.order.promotion" (change)="selectPromotion()">
+                                    <option *ngFor="let promotion of promotions">{{promotion.name}}</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Final Price</td>
+                                <td>{{finalPrice}}</td>
+                            </tr>
+                            <tr>
+                                <td>Payment Method</td>
+                                <td>
+                                    <div *ngFor="let type of paymentTypes">
+                                        <input type="radio" [(ngModel)]="paymentType" [value]="type">
+                                        <span>{{type}}</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </md-card-content>
+            </md-card>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="row" *ngIf="paymentType == 'Credit Card'">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <div class="container-fluid">
+                <div class="creditCardForm" *ngIf="payment">
+                    <div class="heading">
+                        <h1>Confirm Purchase</h1>
+                    </div>
+                    <div class="payment">
+                        <div class="form-group owner">
+                            <label for="owner">Owner</label>
+                            <input type="text" class="form-control" id="owner" [(ngModel)]="payment.name">
+                        </div>
+                        <div class="form-group CVV">
+                            <label for="cvv">CVV</label>
+                            <input type="text" class="form-control" id="cvv" [(ngModel)]="payment.cvv">
+                        </div>
+                        <div class="form-group" id="card-number-field">
+                            <label for="cardNumber">Card Number</label>
+                            <input type="text" class="form-control" id="cardNumber" [(ngModel)]="payment.card">
+                        </div>
+                        <div class="form-group" id="expiration-date">
+                            <label>Expiration Date</label>
+                            <select [(ngModel)]="payment.month" style="width: 80px">
+                                <option *ngFor="let month of months" [value]="month">{{month}}</option>
+                            </select>
+                            <select [(ngModel)]="payment.year" style="width: 100px">
+                                <option *ngFor="let year of years" [value]="year"> {{'20'+year}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="credit_cards">
+                            <img src="../../../content/images/visa.jpg" id="visa">
+                            <img src="../../../content/images/mastercard.jpg" id="mastercard">
+                            <!--<img src="assets/images/amex.jpg" id="amex">-->
+                        </div>
+                        <div class="form-group" id="pay-now">
+                            <button type="submit" class="btn btn-default" id="confirm-purchase" (click)="submit()">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+</div>

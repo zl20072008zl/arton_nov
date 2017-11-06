@@ -1,0 +1,74 @@
+
+<div >
+    <h2>
+        <span>Express Account</span>
+        <button *ngIf="!expressAccount" class="btn btn-primary float-right create-express-account" [routerLink]="['/', { outlets: { popup: ['express-account-new'] } }]">
+        <span class="fa fa-plus"></span>
+        <span >
+            Create new Express Account
+            </span>
+        </button>
+    </h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details" *ngIf="expressAccount">
+        <dt><span>Cp User Name</span></dt>
+        <dd>
+            <span>{{expressAccount.cpUserName}}</span>
+        </dd>
+        <dt><span>Cp Password</span></dt>
+        <dd>
+            <span>{{expressAccount.cpPassword}}</span>
+        </dd>
+        <dt><span>Cp Mailed By</span></dt>
+        <dd>
+            <span>{{expressAccount.cpMailedBy}}</span>
+        </dd>
+        <dt><span>Cp Contract Id</span></dt>
+        <dd>
+            <span>{{expressAccount.cpContractId}}</span>
+        </dd>
+        <dt><span>Cp Maile To</span></dt>
+        <dd>
+            <span>{{expressAccount.cpMaileTo}}</span>
+        </dd>
+        <dt><span>Ups User Id</span></dt>
+        <dd>
+            <span>{{expressAccount.upsUserId}}</span>
+        </dd>
+        <dt><span>Ups Password</span></dt>
+        <dd>
+            <span>{{expressAccount.upsPassword}}</span>
+        </dd>
+        <dt><span>Ups Access License Number</span></dt>
+        <dd>
+            <span>{{expressAccount.upsAccessLicenseNumber}}</span>
+        </dd>
+        <dt><span>Ups Account Number</span></dt>
+        <dd>
+            <span>{{expressAccount.upsAccountNumber}}</span>
+        </dd>
+        <dt><span>Fedex Account Number</span></dt>
+        <dd>
+            <span>{{expressAccount.fedexAccountNumber}}</span>
+        </dd>
+        <dt><span>Fedex Meter Number</span></dt>
+        <dd>
+            <span>{{expressAccount.fedexMeterNumber}}</span>
+        </dd>
+        <dt><span>Fedex Key</span></dt>
+        <dd>
+            <span>{{expressAccount.fedexKey}}</span>
+        </dd>
+        <dt><span>Fedex Password</span></dt>
+        <dd>
+            <span>{{expressAccount.fedexPassword}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            routerLink="../"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

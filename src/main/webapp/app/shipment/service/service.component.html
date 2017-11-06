@@ -1,0 +1,38 @@
+<div class="tab-content" style="margin: 20px;">
+    <div class="table-responsive" *ngIf="services">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th></th>
+                <th><span>Company</span></th>
+                <th><span>Name</span></th>
+                <th><span>Price</span> <span class="fa fa-sort" (click)="sort()"></span></th>
+                <!--<th><span>Delivery Date</span></th>-->
+                <th><span>Transit Time</span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let service of services ;trackBy: trackId" (click)="selectService(service)">
+                <td><input type="checkbox" class="checkbox" [checked]="service == selectedService"></td>
+                <td>{{service.company}}</td>
+                <td>{{service.name}}</td>
+                <td>{{service.price | currency:'CAD':true}}</td>
+                <!--<td>{{service.expectedDeliveryDate}}</td>-->
+                <td>{{service.expectedTransitTime}} Day(s)</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="wizard-footer">
+    <div class="pull-right" style="margin-right: 20px;">
+        <input type="button" class="btn btn-next btn-fill btn-success btn-wd btn-sm"
+               (click)="next()" name="next" value="Continue">
+    </div>
+    <div class="pull-left" style="margin-left: 20px">
+        <input type="button" class="btn btn-previous btn-fill btn-default btn-wd btn-sm"
+               (click)="back()" name="previous" value="Previous">
+    </div>
+    <div class="clearfix"></div>
+</div>
