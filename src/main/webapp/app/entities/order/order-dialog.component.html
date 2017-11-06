@@ -1,0 +1,100 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myOrderLabel">Create or edit a Order</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!order.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="order.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_createdDate">Created Date</label>
+            <div class="input-group">
+                <input id="field_createdDate" type="text" class="form-control" name="createdDate" ngbDatepicker  #createdDateDp="ngbDatepicker" [(ngModel)]="order.createdDate"
+                />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" (click)="createdDateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_updatedDate">Updated Date</label>
+            <div class="input-group">
+                <input id="field_updatedDate" type="text" class="form-control" name="updatedDate" ngbDatepicker  #updatedDateDp="ngbDatepicker" [(ngModel)]="order.updatedDate"
+                />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" (click)="updatedDateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_totalCharges">Total Charges</label>
+            <input type="number" class="form-control" name="totalCharges" id="field_totalCharges"
+                [(ngModel)]="order.totalCharges"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_orderId">Order Id</label>
+            <input type="text" class="form-control" name="orderId" id="field_orderId"
+                [(ngModel)]="order.orderId"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_trackingNumber">Tracking Number</label>
+            <input type="text" class="form-control" name="trackingNumber" id="field_trackingNumber"
+                [(ngModel)]="order.trackingNumber"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_shipperId">Shipper Id</label>
+            <input type="number" class="form-control" name="shipperId" id="field_shipperId"
+                [(ngModel)]="order.shipperId"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_recipientId">Recipient Id</label>
+            <input type="number" class="form-control" name="recipientId" id="field_recipientId"
+                [(ngModel)]="order.recipientId"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_itemId">Item Id</label>
+            <input type="number" class="form-control" name="itemId" id="field_itemId"
+                [(ngModel)]="order.itemId"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_serviceId">Service Id</label>
+            <input type="number" class="form-control" name="serviceId" id="field_serviceId"
+                [(ngModel)]="order.serviceId"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_promotionId">Promotion Id</label>
+            <input type="number" class="form-control" name="promotionId" id="field_promotionId"
+                [(ngModel)]="order.promotionId"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_user">User</label>
+            <input type="text" class="form-control" name="user" id="field_user"
+                [(ngModel)]="order.user"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_receiptId">Receipt Id</label>
+            <input type="number" class="form-control" name="receiptId" id="field_receiptId"
+                [(ngModel)]="order.receiptId"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_labelId">Label Id</label>
+            <input type="number" class="form-control" name="labelId" id="field_labelId"
+                [(ngModel)]="order.labelId"  />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

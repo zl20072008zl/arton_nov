@@ -1,0 +1,69 @@
+<a class="text-uppercase text-primary" (click)="back()">Back </a>
+<section>
+    <div class="col-md-12">
+        <header style="margin-bottom:10px;">
+            <h1 class="text-center">Track Your Package</h1></header>
+        <div class="input-group" style="margin-bottom:10px;margin-top:30px;">
+            <div class="input-group-addon"><span><strong>Tacking Number: </strong></span></div>
+            <input class="form-control" type="text" name="trackingNumber" [(ngModel)]="trackingNumber">
+            <div class="input-group-btn">
+                <button class="btn btn-default" type="button" (click)="track()">Go!</button>
+            </div>
+        </div>
+    </div>
+</section>
+<section *ngIf="trackingSummery">
+    <header>
+        <h1 class="text-center">Tracking Summery</h1>
+    </header>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Tracking Number:</th>
+                <th>{{ trackingSummery.trackingNumber }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Event Date Time:</td>
+                <td>{{ trackingSummery.eventDateTime }}</td>
+                <td>Event Location</td>
+                <td>{{ trackingSummery.eventLocation }}</td>
+            </tr>
+            <tr>
+                <td>Event Type:</td>
+                <td>{{ trackingSummery.eventDescription }}</td>
+                <td>Signatory Name:</td>
+                <td>{{ trackingSummery.signatoryName }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+<section>
+    <header>
+        <h1 class="text-center">Tracking Detail</h1></header>
+    <div class="table-responsive">
+        <table class="table" *ngIf="trackingDetail">
+            <thead>
+            <tr>
+                <th>City, Province</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Signatory Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let track of trackingDetail ;trackBy: trackId">
+                <td>{{ track.city + ', ' + track.province || track.country }}</td>
+                <td>{{ track.status }}</td>
+                <td>{{ track.date }}</td>
+                <td>{{ track.time }}</td>
+                <td>{{ track.signatoryName }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

@@ -1,0 +1,257 @@
+
+<div *ngIf="order">
+    <h2><span>Order</span> {{order.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <div class="row">
+        <div class="col-sm-3">
+            <dt><span>Created Date</span></dt>
+            <dd>
+                <span>{{order.createdDate | date:'mediumDate'}}</span>
+            </dd>
+            <dt><span>Updated Date</span></dt>
+            <dd>
+                <span>{{order.updatedDate | date:'mediumDate'}}</span>
+            </dd>
+            <dt><span>Total Charges</span></dt>
+            <dd>
+                <span>{{order.totalCharges}}</span>
+            </dd>
+            <dt><span>Order Id</span></dt>
+            <dd>
+                <span>{{order.orderId}}</span>
+            </dd>
+            <dt><span>Tracking Number</span></dt>
+            <dd>
+                <span>{{order.trackingNumber}}</span>
+            </dd>
+            <dt><span>Promotion Id</span></dt>
+            <dd>
+                <span>{{order.promotionId}}</span>
+            </dd>
+            <dt><span>User</span></dt>
+            <dd>
+                <span>{{order.user}}</span>
+            </dd>
+        </div>
+        <div class="col-sm-9">
+            <div class="row">
+                <div class="col-sm-4" *ngIf="sender">
+                    <md-card>
+                    <h4><span>Sender Address</span></h4>
+                    <hr>
+                    <dt><span>Name</span></dt>
+                    <dd>
+                        <span>{{sender.name}}</span>
+                    </dd>
+                    <dt><span>Address 1</span></dt>
+                    <dd>
+                        <span>{{sender.address1}}</span>
+                    </dd>
+                    <dt><span>Address 2</span></dt>
+                    <dd>
+                        <span>{{sender.address2}}</span>
+                    </dd>
+                    <dt><span>City</span></dt>
+                    <dd>
+                        <span>{{sender.city}}</span>
+                    </dd>
+                    <dt><span>Province</span></dt>
+                    <dd>
+                        <span>{{sender.province}}</span>
+                    </dd>
+                    <dt><span>Country</span></dt>
+                    <dd>
+                        <span>{{sender.country}}</span>
+                    </dd>
+                    <dt><span>Postal Code</span></dt>
+                    <dd>
+                        <span>{{sender.postalCode}}</span>
+                    </dd>
+                    <dt><span>Phone</span></dt>
+                    <dd>
+                        <span>{{sender.phone}}</span>
+                    </dd>
+                    </md-card>
+                </div>
+                <div class="col-sm-4"  *ngIf="recipient">
+                    <md-card>
+                    <h4><span>Recipient Address</span></h4>
+                    <hr>
+                    <dt><span>Name</span></dt>
+                    <dd>
+                        <span>{{recipient.name}}</span>
+                    </dd>
+                    <dt><span>Address 1</span></dt>
+                    <dd>
+                        <span>{{recipient.address1}}</span>
+                    </dd>
+                    <dt><span>Address 2</span></dt>
+                    <dd>
+                        <span>{{recipient.address2}}</span>
+                    </dd>
+                    <dt><span>City</span></dt>
+                    <dd>
+                        <span>{{recipient.city}}</span>
+                    </dd>
+                    <dt><span>Province</span></dt>
+                    <dd>
+                        <span>{{recipient.province}}</span>
+                    </dd>
+                    <dt><span>Country</span></dt>
+                    <dd>
+                        <span>{{recipient.country}}</span>
+                    </dd>
+                    <dt><span>Postal Code</span></dt>
+                    <dd>
+                        <span>{{recipient.postalCode}}</span>
+                    </dd>
+                    <dt><span>Phone</span></dt>
+                    <dd>
+                        <span>{{recipient.phone}}</span>
+                    </dd>
+                    </md-card>
+                </div>
+                <div class="col-sm-4" *ngIf="item">
+                    <md-card>
+                        <h4><span>Item</span></h4>
+                        <hr>
+                        <dt><span>Type</span></dt>
+                        <dd>
+                            <span>{{item.type}}</span>
+                        </dd>
+                        <dt><span>Value</span></dt>
+                        <dd>
+                            <span>{{item.value}}</span>
+                        </dd>
+                        <dt><span>Unit</span></dt>
+                        <dd>
+                            <span>{{item.unit}}</span>
+                        </dd>
+                        <dt><span>Weight</span></dt>
+                        <dd>
+                            <span>{{item.weight}}</span>
+                        </dd>
+                        <dt><span>Length</span></dt>
+                        <dd>
+                            <span>{{item.length}}</span>
+                        </dd>
+                        <dt><span>Width</span></dt>
+                        <dd>
+                            <span>{{item.width}}</span>
+                        </dd>
+                        <dt><span>Height</span></dt>
+                        <dd>
+                            <span>{{item.height}}</span>
+                        </dd>
+                    </md-card>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 20px">
+                <div class="col-sm-4" *ngIf="service">
+                    <md-card>
+                    <h4><span>Service</span></h4>
+                    <hr>
+                    <dt><span>Company</span></dt>
+                    <dd>
+                        <span>{{service.company}}</span>
+                    </dd>
+                    <dt><span>Name</span></dt>
+                    <dd>
+                        <span>{{service.name}}</span>
+                    </dd>
+                    <dt><span>Price</span></dt>
+                    <dd>
+                        <span>{{service.price}}</span>
+                    </dd>
+                    <dt><span>Expected Delivery Date</span></dt>
+                    <dd>
+                        <span>{{service.expectedDeliveryDate}}</span>
+                    </dd>
+                    <dt><span>Expected Transit Time</span></dt>
+                    <dd>
+                        <span>{{service.expectedTransitTime}}</span>
+                    </dd>
+                    </md-card>
+                </div>
+                <div class="col-sm-4" *ngIf="receipt">
+                    <md-card>
+                        <h4><span>Receipt</span></h4>
+                        <hr>
+                        <dt><span>Message</span></dt>
+                        <dd>
+                            <span>{{receipt.message}}</span>
+                        </dd>
+                        <dt><span>Complete</span></dt>
+                        <dd>
+                            <span>{{receipt.complete}}</span>
+                        </dd>
+                        <dt><span>Card Type</span></dt>
+                        <dd>
+                            <span>{{receipt.cardType}}</span>
+                        </dd>
+                        <dt><span>Txn Number</span></dt>
+                        <dd>
+                            <span>{{receipt.txnNumber}}</span>
+                        </dd>
+                        <dt><span>Receipt Id</span></dt>
+                        <dd>
+                            <span>{{receipt.receiptId}}</span>
+                        </dd>
+                        <dt><span>Trans Date</span></dt>
+                        <dd>
+                            <span>{{receipt.transDate}}</span>
+                        </dd>
+                        <dt><span>Trans Amount</span></dt>
+                        <dd>
+                            <span>{{receipt.transAmount}}</span>
+                        </dd>
+                        <dt><span>Trans Type</span></dt>
+                        <dd>
+                            <span>{{receipt.transType}}</span>
+                        </dd>
+                        <dt><span>Trans Time</span></dt>
+                        <dd>
+                            <span>{{receipt.transTime}}</span>
+                        </dd>
+                    </md-card>
+                </div>
+                <div class="col-sm-4" *ngIf="label">
+                    <md-card>
+                        <h4><span>Label</span></h4>
+                        <hr>
+                        <dt><span>Tracking Number</span></dt>
+                        <dd>
+                            <span>{{label.trackingNumber}}</span>
+                        </dd>
+                        <dt><span>Shipping Label</span></dt>
+                        <dd>
+                            <button class="btn btn-primary" (click)="getLabel(content)">Label</button>
+                        </dd>
+                    </md-card>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit"
+            routerLink="../"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss" style="height: 100%">
+    <div class="modal-header">
+        <h4 class="modal-title">Label</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body" style="height: 700px">
+        <iframe [src]="stream" frameborder="0" style="height: 100%; width: 100%;"></iframe>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+    </div>
+</ng-template>

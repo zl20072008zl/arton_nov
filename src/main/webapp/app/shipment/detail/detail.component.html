@@ -1,0 +1,122 @@
+<div class="tab-content" style="margin: 20px;">
+    <div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-5">
+        <md-card *ngIf="request.sender">
+            <md-card-subtitle>
+                <strong>From:</strong>
+                <button class="btn btn-sm btn-outline-primary pull-right" (click)="edit('address')">EDIT</button>
+            </md-card-subtitle>
+            <hr>
+            <md-card-content>
+                <p>
+                    <span><b>Name: </b>{{request.sender.name}}</span>
+                    <span class="pull-right"><b>Phone: </b>{{request.sender.phone}}</span>
+                </p>
+                <p>
+                    <span><b>Address: </b>
+                        {{
+                            request.sender.address1 + ', ' +
+                            (request.sender.address2 ? request.sender.address2 + ', ' : '') +
+                            request.sender.city + ', ' + request.sender.province + ', ' +
+                            request.sender.country + ' ' + request.sender.postalCode
+                        }}
+                    </span>
+                </p>
+            </md-card-content>
+        </md-card>
+    </div>
+    <div class="col-sm-5">
+        <md-card *ngIf="request.recipient">
+            <md-card-subtitle>
+                <strong>To:</strong>
+                <button class="btn btn-sm btn-outline-primary pull-right" (click)="edit('address')">EDIT</button>
+            </md-card-subtitle>
+            <hr>
+            <md-card-content>
+                <p>
+                    <span><b>Name: </b>{{request.recipient.name}}</span>
+                    <span class="pull-right"><b>Phone: </b>{{request.recipient.phone}}</span>
+                </p>
+                <p>
+                    <span><b>Address: </b>
+                        {{
+                            request.recipient.address1 + ', ' +
+                            (request.recipient.address2 ? request.recipient.address2 + ', ' : '') +
+                            request.recipient.city + ', ' + request.recipient.province + ', ' +
+                            request.recipient.country + ' ' + request.recipient.postalCode
+                        }}
+                    </span>
+                </p>
+            </md-card-content>
+        </md-card>
+    </div>
+    <div class="col-sm-1"></div>
+</div>
+
+    <br>
+
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5">
+            <md-card *ngIf="request.parcel">
+                <md-card-subtitle>
+                    <strong>Item:</strong>
+                    <button class="btn btn-sm btn-outline-primary pull-right" (click)="edit('item')">EDIT</button>
+                </md-card-subtitle>
+                <hr>
+                <md-card-content>
+                    <p>
+                        <span><b>Type: </b>{{request.parcel.type}}</span>
+                        <span class="pull-right"><b>Weight: </b>{{request.parcel.weight + ' ' + request.parcel.unit}}</span>
+                    </p>
+                    <p *ngIf="request.parcel.value">
+                        <span><b>Declared Value: </b>{{request.parcel.value}}</span>
+                    </p>
+                    <p *ngIf="request.parcel.height && request.parcel.length && request.parcel.width">
+                        <span>
+                            <b>Dimensions: </b>
+                            {{
+                                request.parcel.length + ' x ' +
+                                request.parcel.width + ' x ' +
+                                request.parcel.height + ' ' +
+                                (request.parcel.unit == 'KGS' ? 'cm' : 'in')
+                            }}
+                        </span>
+                    </p>
+                </md-card-content>
+            </md-card>
+        </div>
+        <div class="col-sm-5">
+            <md-card *ngIf="request.service">
+                <md-card-subtitle>
+                    <b>Service:</b>
+                    <button class="btn btn-sm btn-outline-primary pull-right" (click)="edit('service')">EDIT</button>
+                </md-card-subtitle>
+                <hr>
+                <md-card-content>
+                    <p>
+                        <span><b>Company: </b>{{request.service.company}}</span>
+                        <span class="pull-right"><b>Name: </b>{{request.service.name}}</span>
+                    </p>
+                    <p>
+                        <span><b>Price: </b>{{request.service.price | currency:'CAD':true}}</span>
+                        <!--<span class="pull-right"><b>Delivery Date: </b>{{request.service.expectedDeliveryDate | date:'medium'}}</span>-->
+                    </p>
+                    <p>
+                        <span><b>Transit Time: </b>{{request.service.expectedTransitTime + 'Day(s)'}}</span>
+                    </p>
+                </md-card-content>
+            </md-card>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+</div>
+
+<div class="wizard-footer">
+    <div class="pull-right" style="margin-right: 20px;">
+        <input type="button" class="btn btn-next btn-fill btn-success btn-wd btn-sm"
+               (click)="next()" name="next" value="Continue">
+    </div>
+    <div class="clearfix"></div>
+</div>

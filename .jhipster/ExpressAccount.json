@@ -1,0 +1,59 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "cpUserName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "cpPassword",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "cpMailedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "cpContractId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "upsUserName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "upsPassword",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "upsAccessLicenseNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "upsAccountNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fedexAccountNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fedexMeterNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fedexKey",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fedexPassword",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20171105184756",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "express_account",
+    "pagination": "no"
+}

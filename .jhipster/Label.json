@@ -1,0 +1,47 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "createdDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "updatedDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "trackingNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "shippingLabel",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "link",
+            "fieldType": "String",
+            "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "shipmentId",
+            "fieldType": "String",
+            "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "shipmentStatus",
+            "fieldType": "String",
+            "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "user",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170708195918",
+    "dto": "mapstruct",
+    "service": "no",
+    "entityTableName": "label",
+    "pagination": "pagination"
+}

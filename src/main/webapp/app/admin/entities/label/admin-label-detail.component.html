@@ -1,0 +1,44 @@
+
+<div *ngIf="label">
+    <h2><span>Label</span> {{label.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Created Date</span></dt>
+        <dd>
+            <span>{{label.createdDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Updated Date</span></dt>
+        <dd>
+            <span>{{label.updatedDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Tracking Number</span></dt>
+        <dd>
+            <span>{{label.trackingNumber}}</span>
+        </dd>
+        <dt><span>Shipping Label</span></dt>
+        <dd>
+            <div *ngIf="label.shippingLabel">
+                <a (click)="openFile(label.shippingLabelContentType, label.shippingLabel)">open</a>
+                {{label.shippingLabelContentType}}, {{byteSize(label.shippingLabel)}}
+            </div>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+            <span>{{label.user}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'label/'+ label.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>
