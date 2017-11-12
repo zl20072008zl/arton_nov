@@ -36,7 +36,7 @@ spring:
         type: com.zaxxer.hikari.HikariDataSource
         url: jdbc:mysql://localhost:3306/artonexpress?useUnicode=true&characterEncoding=utf8&useSSL=false
         username: root
-        password: root
+        password: somoplay0301
         hikari:
             data-source-properties:
                 cachePrepStmts: true
@@ -90,7 +90,7 @@ liquibase:
 #        keyAlias: artonexpress
 # ===================================================================
 server:
-    port: 8080
+    port: 80
 
 # ===================================================================
 # JHipster specific properties
