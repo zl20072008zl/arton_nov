@@ -22,27 +22,32 @@ public class CpService {
 
     private ExpressAccount expressAccount = expressAccountRepository.findOne((long)1);
 
-    private String username = expressAccount.getCpUserName();
-    private String password = expressAccount.getCpPassword();
-    private String mailedBy = expressAccount.getCpMailedBy();
-    private String contract_id = expressAccount.getCpContractId();
+//    private String username = expressAccount.getCpUserName();
+//    private String password = expressAccount.getCpPassword();
+//    private String mailedBy = expressAccount.getCpMailedBy();
+//    private String contract_id = expressAccount.getCpContractId();
+
+    private String username;
+    private String password;
+    private String mailedBy;
+    private String contract_id;
 
     public CpService() {
-//        Properties userProps = new Properties();
-//        FileInputStream propInputStream;
-//        try {
-//            propInputStream = new FileInputStream("user.properties");
-//            userProps.load(propInputStream);
-//            propInputStream.close(); // better in finally block
-//        } catch (Exception e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace(System.out);
-//            return;
-//        }
-//        this.username = userProps.getProperty("cp_username");
-//        this.password = userProps.getProperty("cp_password");
-//        this.mailedBy = userProps.getProperty("cp_mailedBy");
-//        this.contract_id = userProps.getProperty("cp_contract_id");
+        Properties userProps = new Properties();
+        FileInputStream propInputStream;
+        try {
+            propInputStream = new FileInputStream("user.properties");
+            userProps.load(propInputStream);
+            propInputStream.close(); // better in finally block
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace(System.out);
+            return;
+        }
+        this.username = userProps.getProperty("cp_username");
+        this.password = userProps.getProperty("cp_password");
+        this.mailedBy = userProps.getProperty("cp_mailedBy");
+        this.contract_id = userProps.getProperty("cp_contract_id");
 
         ClientConfig config = new DefaultClientConfig();
         aClient = Client.create(config);
