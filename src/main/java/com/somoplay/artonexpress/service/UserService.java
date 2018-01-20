@@ -37,22 +37,16 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
-//    private final SocialService socialService;
+    private final SocialService socialService;
 
     private final AuthorityRepository authorityRepository;
 
-//    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, SocialService socialService, AuthorityRepository authorityRepository) {
-//        this.userRepository = userRepository;
-//        this.passwordEncoder = passwordEncoder;
-//        this.socialService = socialService;
-//        this.authorityRepository = authorityRepository;
-//    }
-public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository) {
-    this.userRepository = userRepository;
-    this.passwordEncoder = passwordEncoder;
-//    this.socialService = socialService;
-    this.authorityRepository = authorityRepository;
-}
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, SocialService socialService, AuthorityRepository authorityRepository) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.socialService = socialService;
+        this.authorityRepository = authorityRepository;
+    }
 
     public Optional<User> activateRegistration(String key) {
         log.debug("Activating user for activation key {}", key);
@@ -194,7 +188,7 @@ public UserService(UserRepository userRepository, PasswordEncoder passwordEncode
 
     public void deleteUser(String login) {
         userRepository.findOneByLogin(login).ifPresent(user -> {
-//            socialService.deleteUserSocialConnection(user.getLogin());
+            socialService.deleteUserSocialConnection(user.getLogin());
             userRepository.delete(user);
             log.debug("Deleted User: {}", user);
         });
