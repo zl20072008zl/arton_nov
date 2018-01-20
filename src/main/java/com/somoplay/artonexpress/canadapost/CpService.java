@@ -18,9 +18,9 @@ import java.util.Properties;
 public class CpService {
     private Client aClient;
 
-    private final ExpressAccountRepository expressAccountRepository = null;
+//    private final ExpressAccountRepository expressAccountRepository = null;
 
-    private ExpressAccount expressAccount = expressAccountRepository.findOne((long)1);
+//    private ExpressAccount expressAccount = expressAccountRepository.findOne((long)1);
 
 //    private String username = expressAccount.getCpUserName();
 //    private String password = expressAccount.getCpPassword();

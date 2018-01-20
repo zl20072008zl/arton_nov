@@ -74,6 +74,7 @@ export class ShipmentPaymentComponent implements OnInit {
                                                 this.request.label.shipmentId = data.shipmentId;
                                                 this.request.label.shipmentStatus = data.shipmentStatus;
                                                 this.request.label.trackingNumber = data.trackingNumber;
+                                                delete this.request.label.id;
 
                                                 this.labelService.create(this.request.label)
                                                     .subscribe((label) => {
@@ -119,6 +120,7 @@ delete this.request.label.id;
                                             this.request.label.shipmentId = res.shipmentId;
                                             this.request.label.shippingLabel = res.labelLink;
                                             this.request.label.shipmentStatus = 'Completed';
+                                            delete this.request.label.id;
 
                                             this.labelService.create(this.request.label)
                                                 .subscribe((label) => {

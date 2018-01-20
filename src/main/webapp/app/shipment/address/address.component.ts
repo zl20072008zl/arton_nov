@@ -33,10 +33,12 @@ export class ShipmentAddressComponent implements OnInit, DoCheck {
     ngOnInit() {
         if (!this.request.sender) {
             this.request.sender = new Address();
+            this.request.sender.user = this.request.user.login;
         }
 
         if (!this.request.recipient) {
             this.request.recipient = new Address();
+            this.request.recipient.user = this.request.user.login;
         }
 
         if (!this.request.sender.country) {
