@@ -87,6 +87,19 @@
                  </small>
             </div>
         </div>
+        <div class="form-group">
+            <label>Promotion</label>
+            <select name="promotionId" [(ngModel)]="user.promotionId" >
+                <option value=""></option>
+                <option *ngFor="let promotion of promotions" value="{{promotion.id}}">{{promotion.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Payment Method</label>
+            <select name="paymentType" [(ngModel)]="user.paymentType" >
+                <option *ngFor="let type of paymentTypes; let i = index" [value]="i">{{type}}</option>
+            </select>
+        </div>
         <div class="form-check">
             <label class="form-check-label" for="activated">
                 <input class="form-check-input" [disabled]="user.id === null" type="checkbox" id="activated" name="activated" [(ngModel)]="user.activated">

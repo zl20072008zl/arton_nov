@@ -37,13 +37,13 @@ export class ShipmentServiceComponent implements OnInit, DoCheck {
 
         Observable.forkJoin(
             this.cpService.getCpRates(this.request),
-            this.upsService.getTnt(this.request),
+            //this.upsService.getTnt(this.request),
             this.fedexService.getRate(this.request)
         ).subscribe(
             (data) => {
                 this.services = this.services.concat(data[0]);
+                //this.services = this.services.concat(data[1]);
                 this.services = this.services.concat(data[1]);
-                this.services = this.services.concat(data[2]);
 
                 this.services = this.services.sort(function(a, b) {
                     return a.price - b.price;

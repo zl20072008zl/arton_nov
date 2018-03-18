@@ -100,31 +100,33 @@ export class HomeComponent implements OnInit {
     }
 
     getRates() {
-        if (this.isAuthenticated()) {
+        // if (this.isAuthenticated()) {
             Observable.forkJoin(
                 this.cpService.getCpRates(this.rates),
-                this.upsService.getTnt(this.rates),
+                //this.upsService.getTnt(this.rates),
                 this.fedexService.getRate(this.rates)
             ).subscribe(
                 (data) => {
                     let localServices: any = [];
                     localServices = localServices.concat(data[0]);
+                    //localServices = localServices.concat(data[1]);
                     localServices = localServices.concat(data[1]);
-                    localServices = localServices.concat(data[2]);
 
                     localServices = localServices.sort(function(a, b) {
                         return a.price - b.price;
                     });
                     console.log(localServices);
-                    this.localStorageService.store('shipment.rates.data.' + this.account.login, localServices);
-                    this.localStorageService.store('shipment.request.data.' + this.account.login, this.rates);
+                    // this.localStorageService.store('shipment.rates.data.' + this.account.login, localServices);
+                    // this.localStorageService.store('shipment.request.data.' + this.account.login, this.rates);
+                    this.localStorageService.store('shipment.rates.data.', localServices);
+                    this.localStorageService.store('shipment.request.data.', this.rates);
                     this.router.navigate(['/rates']);
                 },
                 (err) => console.error(err)
             );
-        } else {
-            this.registerAuthenticationSuccess();
-        }
+        // } else {
+        //     this.registerAuthenticationSuccess();
+        // }
     }
 
     setCountryCode() {

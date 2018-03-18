@@ -53,6 +53,10 @@ public class UserDTO {
 
     private Set<String> authorities;
 
+    private Long promotionId;
+
+    private Long paymentType;
+
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -62,13 +66,13 @@ public class UserDTO {
             user.getEmail(), user.getActivated(), user.getImageUrl(), user.getLangKey(),
             user.getCreatedBy(), user.getCreatedDate(), user.getLastModifiedBy(), user.getLastModifiedDate(),
             user.getAuthorities().stream().map(Authority::getName)
-                .collect(Collectors.toSet()));
+                .collect(Collectors.toSet()), user.getPromotionId(), user.getPaymentType());
     }
 
     public UserDTO(Long id, String login, String firstName, String lastName,
         String email, boolean activated, String imageUrl, String langKey,
         String createdBy, Instant createdDate, String lastModifiedBy, Instant lastModifiedDate,
-        Set<String> authorities) {
+        Set<String> authorities, Long promotionId, Long paymentType) {
 
         this.id = id;
         this.login = login;
@@ -83,6 +87,8 @@ public class UserDTO {
         this.lastModifiedBy = lastModifiedBy;
         this.lastModifiedDate = lastModifiedDate;
         this.authorities = authorities;
+        this.promotionId = promotionId;
+        this.paymentType = paymentType;
     }
 
     public Long getId() {
@@ -147,6 +153,22 @@ public class UserDTO {
 
     public Set<String> getAuthorities() {
         return authorities;
+    }
+
+    public Long getPromotionId() {
+        return promotionId;
+    }
+
+    public void setPromotionId(Long promotionId) {
+        this.promotionId = promotionId;
+    }
+
+    public Long getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(Long paymentType) {
+        this.paymentType = paymentType;
     }
 
     @Override

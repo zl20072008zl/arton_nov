@@ -10,6 +10,7 @@ import { ResponseWrapper, createRequestOption } from '../../shared';
 export class PromotionService {
 
     private resourceUrl = 'api/promotions';
+    private activePromotionUrl = 'api/active_promotion';
 
     constructor(private http: Http, private dateUtils: JhiDateUtils) { }
 
@@ -35,6 +36,14 @@ export class PromotionService {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
             const jsonResponse = res.json();
             this.convertItemFromServer(jsonResponse);
+            return jsonResponse;
+        });
+    }
+
+    findAll(): Observable<any> {
+        return this.http.get(`${this.activePromotionUrl}`).map((res: Response) => {
+            const jsonResponse = res.json();
+            //this.convertItemFromServer(jsonResponse);
             return jsonResponse;
         });
     }

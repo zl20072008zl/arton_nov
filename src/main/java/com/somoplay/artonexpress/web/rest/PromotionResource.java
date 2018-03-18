@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -119,6 +121,31 @@ public class PromotionResource {
         Promotion promotion = promotionRepository.findOne(id);
         PromotionDTO promotionDTO = promotionMapper.toDto(promotion);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(promotionDTO));
+    }
+
+    /**
+     * GET  /promotions : get all the promotions.
+     *
+     * @param
+     * @return the ResponseEntity with status 200 (OK) and the list of promotions in body
+     */
+    @GetMapping("/active_promotion")
+    @Timed
+    public List<Promotion> getAllActivePromotions() {
+        List<Promotion> list = promotionRepository.findAll();
+        LocalDate now = LocalDate.now();
+        boolean start = false;
+        boolean end = false;
+        List<Promotion> promotionList = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            Promotion promotion = list.get(i);
+            start = now.isAfter(promotion.getStartDate());
+            end = now.isBefore(promotion.getExpiredDate());
+            if(start && end){
+                promotionList.add(promotion);
+            }
+        }
+        return promotionList;
     }
 
     /**

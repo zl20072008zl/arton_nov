@@ -176,6 +176,8 @@ public class UserService {
                 user.setActivated(userDTO.isActivated());
                 user.setLangKey(userDTO.getLangKey());
                 Set<Authority> managedAuthorities = user.getAuthorities();
+                user.setPromotionId(userDTO.getPromotionId());
+                user.setPaymentType(userDTO.getPaymentType());
                 managedAuthorities.clear();
                 userDTO.getAuthorities().stream()
                     .map(authorityRepository::findOne)

@@ -17,9 +17,10 @@
                             <tr>
                                 <td>Promotion</td>
                                 <td>
-                                    <select name="promotion" [(ngModel)]="request.order.promotion" (change)="selectPromotion()">
-                                    <option *ngFor="let promotion of promotions">{{promotion.name}}</option>
-                                    </select>
+                                    <!--<select name="promotion" [(ngModel)]="request.order.promotion" (change)="selectPromotion()">-->
+                                    <!--<option *ngFor="let promotion of promotions">{{promotion.name}}</option>-->
+                                    <!--</select>-->
+                                    {{request.promotion.name}} -- {{request.promotion.percentageOff}}%
                                 </td>
                             </tr>
                             <tr>
