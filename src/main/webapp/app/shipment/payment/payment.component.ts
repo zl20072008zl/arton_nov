@@ -8,6 +8,8 @@ import {ReceiptService} from '../../services/entities/receipt.service';
 import {LabelService} from '../../services/entities/label.service';
 import {UpsService} from '../../services/ups/ups.service';
 import {FedexService} from '../../services/fedex/fedex.service';
+import {PromotionService} from "../../entities/promotion/promotion.service";
+import {Promotion} from "../../entities/promotion/promotion.model";
 
 @Component({
     selector: 'shipment-payment-component',
@@ -40,11 +42,13 @@ export class ShipmentPaymentComponent implements OnInit {
         private receiptService: ReceiptService,
         private labelService: LabelService,
         private upsService: UpsService,
-        private fedexService: FedexService
+        private fedexService: FedexService,
+        private promotionService: PromotionService
     ) { }
 
     ngOnInit() {
         this.finalPrice = parseFloat(this.request.order.totalCharges).toFixed(2);
+        this.selectPromotion();
     }
 
     submit() {
@@ -65,6 +69,7 @@ export class ShipmentPaymentComponent implements OnInit {
                         this.receiptService.create(res).subscribe((receipt) => {
                             this.request.receipt = receipt;
                             this.request.order.receiptId = this.request.receipt.id;
+                            this.request.order.totalCharges = this.finalPrice;
                             switch (this.request.service.company) {
                                 case 'Canada Post':
                                     this.cpService.getCpNonContractShipping(this.request)
@@ -144,10 +149,20 @@ delete this.request.label.id;
     }
 
     selectPromotion() {
-        if (this.request.promotion && this.request.promotion.id) {
-            this.request.order.promotionId = this.request.promotion.id;
+        this.promotionService.find(this.request.user.promotionId).subscribe((promotion) => {
+            this.request.order.promotion = new Promotion();
+            this.request.promotion = new Promotion();
+            if(promotion.startDate < new Date() && promotion.expiredDate > new Date()){
+                this.request.order.promotion = promotion;
+                this.request.order.promotionId = promotion.id;
+                this.request.promotion = promotion;
+            }
+            else{
+                this.request.promotion.name = "No Promotion";
+                this.request.promotion.percentageOff = 100;
+            }
             this.finalPrice = (parseFloat(this.finalPrice) - parseFloat(this.finalPrice) * this.request.promotion.percentageOff / 100).toFixed(2);
-        }
+        });
     }
 
 }

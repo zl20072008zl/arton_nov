@@ -90,6 +90,7 @@ import {MdButtonModule, MdCardModule, MdMenuModule} from '@angular/material';
 import {SearchFilterPipe} from "../pipes/filter.pipe";
 import {AdminAccountComponent} from "./account/admin-account.component";
 import {AdminAccountDialogComponent} from "./account/admin-account-dialog.component";
+import {PromotionService} from "../entities/promotion/promotion.service";
 
 @NgModule({
     imports: [
@@ -206,6 +207,7 @@ import {AdminAccountDialogComponent} from "./account/admin-account-dialog.compon
         AdminReceiptResolvePagingParams,
         AdminServiceResolvePagingParams,
         PasswordService,
+        PromotionService
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -46,6 +46,8 @@
             </column>
             <column name="last_modified_by" type="varchar(50)"/>
             <column name="last_modified_date" type="timestamp"/>
+            <column name="promotion_id" type="bigint"/>
+            <column name="payment_type" type="bigint"/>
         </createTable>
         <createIndex indexName="idx_user_login"
             tableName="jhi_user"

@@ -17,6 +17,7 @@ export class RatesComponent implements OnInit {
     selectedService: any;
     request:ShipmentRequest;
 
+
     constructor(
         private principal: Principal,
         private router: Router,
@@ -26,11 +27,13 @@ export class RatesComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.principal.identity().then((account) => {
-            this.account = account;
-            this.services = this.localStorageService.retrieve('shipment.rates.data.' + this.account.login);
-            this.request = this.localStorageService.retrieve('shipment.request.data.' + this.account.login);
-        });
+        //this.principal.identity().then((account) => {
+            //this.account = account;
+            // this.services = this.localStorageService.retrieve('shipment.rates.data.' + this.account.login);
+            // this.request = this.localStorageService.retrieve('shipment.request.data.' + this.account.login);
+            this.services = this.localStorageService.retrieve('shipment.rates.data.');
+            this.request = this.localStorageService.retrieve('shipment.request.data.');
+        //});
     }
 
     back(): void {
@@ -38,10 +41,18 @@ export class RatesComponent implements OnInit {
     }
 
     shipment() {
-        if (this.selectedService) {
-            this.localStorageService.store('shipment.request.data.' + this.account.login, this.request);
-            this.router.navigate(['/shipment']);
-        }
+        this.principal.identity().then((account) => {
+            this.account = account;
+            if(this.account){
+                if (this.selectedService) {
+                    this.localStorageService.store('shipment.request.data.' + this.account.login, this.request);
+                    this.router.navigate(['/shipment']);
+                }
+            }else{
+                this.router.navigate(['/register']);
+            }
+        });
+
     }
 
     selectService(service: any): void {
@@ -50,4 +61,6 @@ export class RatesComponent implements OnInit {
             this.request.service[key] = this.selectedService[key];
         });
     }
+
+
 }

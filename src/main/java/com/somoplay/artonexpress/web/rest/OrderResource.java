@@ -106,7 +106,7 @@ public class OrderResource {
         return new ResponseEntity<>(orderMapper.toDto(page.getContent()), headers, HttpStatus.OK);
     }
 
-    @GetMapping("//user/{login}")
+    @GetMapping("/orders/user/{login}")
     @Timed
     public ResponseEntity<List<OrderDTO>> getAllOrdersByUser(@PathVariable String login, @ApiParam Pageable pageable) {
         log.debug("REST request to get a page of Orders");
