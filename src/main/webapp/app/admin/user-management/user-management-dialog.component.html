@@ -97,7 +97,7 @@
         <div class="form-group">
             <label>Payment Method</label>
             <select name="paymentType" [(ngModel)]="user.paymentType" >
-                <option *ngFor="let type of paymentTypes; let i = index" [value]="i">{{type}}</option>
+                <option *ngFor="let type of paymentTypes" [value]="type">{{type}}</option>
             </select>
         </div>
         <div class="form-check">

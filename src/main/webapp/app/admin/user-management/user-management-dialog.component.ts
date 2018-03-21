@@ -19,7 +19,7 @@ export class UserMgmtDialogComponent implements OnInit {
     authorities: any[];
     isSaving: Boolean;
     promotions: any[];
-    public paymentTypes: any = ['Credit Card', 'Paypal', 'Account'];
+    public paymentTypes: any = ['Credit Card', 'Account'];
 
     constructor(
         public activeModal: NgbActiveModal,
