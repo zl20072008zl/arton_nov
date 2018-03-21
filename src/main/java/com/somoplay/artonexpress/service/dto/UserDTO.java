@@ -55,7 +55,7 @@ public class UserDTO {
 
     private Long promotionId;
 
-    private Long paymentType;
+    private String paymentType;
 
     public UserDTO() {
         // Empty constructor needed for Jackson.
@@ -72,7 +72,7 @@ public class UserDTO {
     public UserDTO(Long id, String login, String firstName, String lastName,
         String email, boolean activated, String imageUrl, String langKey,
         String createdBy, Instant createdDate, String lastModifiedBy, Instant lastModifiedDate,
-        Set<String> authorities, Long promotionId, Long paymentType) {
+        Set<String> authorities, Long promotionId, String paymentType) {
 
         this.id = id;
         this.login = login;
@@ -163,11 +163,11 @@ public class UserDTO {
         this.promotionId = promotionId;
     }
 
-    public Long getPaymentType() {
+    public String getPaymentType() {
         return paymentType;
     }
 
-    public void setPaymentType(Long paymentType) {
+    public void setPaymentType(String paymentType) {
         this.paymentType = paymentType;
     }
 

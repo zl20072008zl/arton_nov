@@ -5,6 +5,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Account, Principal} from '../shared';
 import {LocalStorageService} from 'ng2-webstorage';
 import {ShipmentRequest} from "../shipment/shipment.model";
+import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import {LoginModalService} from "../shared/login/login-modal.service";
 
 @Component({
   selector: 'jhi-rates',
@@ -16,13 +18,15 @@ export class RatesComponent implements OnInit {
     services: any[] = [];
     selectedService: any;
     request:ShipmentRequest;
+    modalRef: NgbModalRef;
 
 
     constructor(
         private principal: Principal,
         private router: Router,
         private location: Location,
-        private localStorageService: LocalStorageService
+        private localStorageService: LocalStorageService,
+        private loginModalService: LoginModalService
     ) {
     }
 
@@ -49,7 +53,9 @@ export class RatesComponent implements OnInit {
                     this.router.navigate(['/shipment']);
                 }
             }else{
-                this.router.navigate(['/register']);
+                //this.router.navigate(['/register']);
+                //open login
+                this.modalRef = this.loginModalService.open();
             }
         });
 
@@ -61,6 +67,5 @@ export class RatesComponent implements OnInit {
             this.request.service[key] = this.selectedService[key];
         });
     }
-
 
 }

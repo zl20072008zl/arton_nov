@@ -87,7 +87,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     private Long promotionId;
 
     @Column(name = "payment_type")
-    private Long paymentType;
+    private String paymentType;
 
     @JsonIgnore
     @ManyToMany
@@ -207,9 +207,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setPromotionId(Long promotionId) { this.promotionId = promotionId; }
 
-    public Long getPaymentType() { return paymentType; }
+    public String getPaymentType() { return paymentType; }
 
-    public void setPaymentType(Long paymentType) { this.paymentType = paymentType; }
+    public void setPaymentType(String paymentType) { this.paymentType = paymentType; }
 
     @Override
     public boolean equals(Object o) {

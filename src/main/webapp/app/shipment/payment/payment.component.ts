@@ -31,7 +31,7 @@ export class ShipmentPaymentComponent implements OnInit {
     };
     public months: any = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
     public years: any = ['17', '18', '19', '20', '21', '22', '23', '24', '25', '26'];
-    public paymentTypes: any = ['Credit Card', 'Paypal', 'Account'];
+    public paymentTypes: any = ['Credit Card', 'Account'];
 
     constructor(
         private localSt: LocalStorageService,
@@ -52,7 +52,10 @@ export class ShipmentPaymentComponent implements OnInit {
     }
 
     submit() {
-        if (this.payment.name && this.payment.card && this.payment.cvv &&
+        if(this.paymentType == 'Account'){
+            this.completeOrder(null);
+        }else
+        if (this.paymentType == 'Credit Card' && this.payment.name && this.payment.card && this.payment.cvv &&
             this.payment.month && this.payment.year
         ) {
             this.moneris.getPurchase({
@@ -66,83 +69,7 @@ export class ShipmentPaymentComponent implements OnInit {
             })
                 .subscribe((res) => {
                     if (res.complete) {
-                        this.receiptService.create(res).subscribe((receipt) => {
-                            this.request.receipt = receipt;
-                            this.request.order.receiptId = this.request.receipt.id;
-                            this.request.order.totalCharges = this.finalPrice;
-                            switch (this.request.service.company) {
-                                case 'Canada Post':
-                                    this.cpService.getCpNonContractShipping(this.request)
-                                        .subscribe(
-                                            (data) => {
-                                                this.request.label.link = data.labelLink;
-                                                this.request.label.shipmentId = data.shipmentId;
-                                                this.request.label.shipmentStatus = data.shipmentStatus;
-                                                this.request.label.trackingNumber = data.trackingNumber;
-                                                delete this.request.label.id;
-
-                                                this.labelService.create(this.request.label)
-                                                    .subscribe((label) => {
-                                                        this.request.label = label;
-                                                        this.request.order.labelId = label.id;
-                                                        this.request.order.trackingNumber = label.trackingNumber;
-
-                                                        this.orderService.update(this.request.order)
-                                                            .subscribe(() => {
-                                                                this.localSt.store('shipment.request.data.' + this.request.user.login, this.request);
-                                                                this.router.navigate(['/shipment', 'label']);
-                                                            });
-                                                    });
-                                            }
-                                        );
-                                    break;
-                                case 'UPS':
-                                    this.upsService.getShipping(this.request)
-                                        .subscribe((res) => {
-                                            this.request.label.trackingNumber = res.trackingNumber;
-                                            this.request.label.shipmentId = res.shipmentId;
-                                            this.request.label.shippingLabel = res.shippingLabel;
-                                            this.request.label.shipmentStatus = 'Completed';
-delete this.request.label.id;
-                                            this.labelService.create(this.request.label)
-                                                .subscribe((label) => {
-                                                    this.request.label = label;
-                                                    this.request.order.labelId = label.id;
-                                                    this.request.order.trackingNumber = label.trackingNumber;
-
-                                                    this.orderService.update(this.request.order)
-                                                        .subscribe(() => {
-                                                            this.localSt.store('shipment.request.data.' + this.request.user.login, this.request);
-                                                            this.router.navigate(['/shipment', 'label']);
-                                                        });
-                                                });
-                                        });
-                                    break;
-                                case 'Fedex':
-                                    this.fedexService.getShip(this.request)
-                                        .subscribe((res) => {
-                                            this.request.label.trackingNumber = res.trackingNumber;
-                                            this.request.label.shipmentId = res.shipmentId;
-                                            this.request.label.shippingLabel = res.labelLink;
-                                            this.request.label.shipmentStatus = 'Completed';
-                                            delete this.request.label.id;
-
-                                            this.labelService.create(this.request.label)
-                                                .subscribe((label) => {
-                                                    this.request.label = label;
-                                                    this.request.order.labelId = label.id;
-                                                    this.request.order.trackingNumber = label.trackingNumber;
-
-                                                    this.orderService.update(this.request.order)
-                                                        .subscribe(() => {
-                                                            this.localSt.store('shipment.request.data.' + this.request.user.login, this.request);
-                                                            this.router.navigate(['/shipment', 'label']);
-                                                        });
-                                                });
-                                        });
-                                    break;
-                            }
-                        });
+                        this.completeOrder(res);
                     }
                 });
         }
@@ -162,6 +89,86 @@ delete this.request.label.id;
                 this.request.promotion.percentageOff = 100;
             }
             this.finalPrice = (parseFloat(this.finalPrice) - parseFloat(this.finalPrice) * this.request.promotion.percentageOff / 100).toFixed(2);
+        });
+    }
+
+    completeOrder(res){
+        this.receiptService.create(res).subscribe((receipt) => {
+            this.request.receipt = receipt;
+            this.request.order.receiptId = this.request.receipt.id;
+            this.request.order.totalCharges = this.finalPrice;
+            switch (this.request.service.company) {
+                case 'Canada Post':
+                    this.cpService.getCpNonContractShipping(this.request)
+                        .subscribe(
+                            (data) => {
+                                this.request.label.link = data.labelLink;
+                                this.request.label.shipmentId = data.shipmentId;
+                                this.request.label.shipmentStatus = data.shipmentStatus;
+                                this.request.label.trackingNumber = data.trackingNumber;
+                                delete this.request.label.id;
+
+                                this.labelService.create(this.request.label)
+                                    .subscribe((label) => {
+                                        this.request.label = label;
+                                        this.request.order.labelId = label.id;
+                                        this.request.order.trackingNumber = label.trackingNumber;
+
+                                        this.orderService.update(this.request.order)
+                                            .subscribe(() => {
+                                                this.localSt.store('shipment.request.data.' + this.request.user.login, this.request);
+                                                this.router.navigate(['/shipment', 'label']);
+                                            });
+                                    });
+                            }
+                        );
+                    break;
+                case 'UPS':
+                    this.upsService.getShipping(this.request)
+                        .subscribe((res) => {
+                            this.request.label.trackingNumber = res.trackingNumber;
+                            this.request.label.shipmentId = res.shipmentId;
+                            this.request.label.shippingLabel = res.shippingLabel;
+                            this.request.label.shipmentStatus = 'Completed';
+                            delete this.request.label.id;
+                            this.labelService.create(this.request.label)
+                                .subscribe((label) => {
+                                    this.request.label = label;
+                                    this.request.order.labelId = label.id;
+                                    this.request.order.trackingNumber = label.trackingNumber;
+
+                                    this.orderService.update(this.request.order)
+                                        .subscribe(() => {
+                                            this.localSt.store('shipment.request.data.' + this.request.user.login, this.request);
+                                            this.router.navigate(['/shipment', 'label']);
+                                        });
+                                });
+                        });
+                    break;
+                case 'Fedex':
+                    this.fedexService.getShip(this.request)
+                        .subscribe((res) => {
+                            this.request.label.trackingNumber = res.trackingNumber;
+                            this.request.label.shipmentId = res.shipmentId;
+                            this.request.label.shippingLabel = res.labelLink;
+                            this.request.label.shipmentStatus = 'Completed';
+                            delete this.request.label.id;
+
+                            this.labelService.create(this.request.label)
+                                .subscribe((label) => {
+                                    this.request.label = label;
+                                    this.request.order.labelId = label.id;
+                                    this.request.order.trackingNumber = label.trackingNumber;
+
+                                    this.orderService.update(this.request.order)
+                                        .subscribe(() => {
+                                            this.localSt.store('shipment.request.data.' + this.request.user.login, this.request);
+                                            this.router.navigate(['/shipment', 'label']);
+                                        });
+                                });
+                        });
+                    break;
+            }
         });
     }
 

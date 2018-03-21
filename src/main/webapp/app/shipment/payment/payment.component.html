@@ -30,9 +30,15 @@
                             <tr>
                                 <td>Payment Method</td>
                                 <td>
-                                    <div *ngFor="let type of paymentTypes">
-                                        <input type="radio" [(ngModel)]="paymentType" [value]="type">
-                                        <span>{{type}}</span>
+                                    <div *ngIf="request.user.paymentType == 'Credit Card'">
+                                        <input type="radio" [(ngModel)]="paymentType" [value]="request.user.paymentType">
+                                        <span>{{request.user.paymentType}}</span>
+                                    </div>
+                                    <div *ngIf="request.user.paymentType == 'Account'">
+                                        <div *ngFor="let type of paymentTypes">
+                                            <input type="radio" [(ngModel)]="paymentType" [value]="type">
+                                            <span>{{type}}</span>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>
@@ -80,6 +86,25 @@
                         </div>
                         <div class="form-group" id="pay-now">
                             <button type="submit" class="btn btn-default" id="confirm-purchase" (click)="submit()">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+
+    <div class="row" *ngIf="paymentType == 'Account'">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <div class="container-fluid">
+                <div class="creditCardForm" *ngIf="payment">
+                    <div class="heading">
+                        <h1>Confirm Purchase</h1>
+                    </div>
+                    <div class="payment"style="width:100%">
+                        <div class="form-group" id="pay-now-account"style="width:100%">
+                            <button type="submit" class="btn btn-default" id="confirm-purchase-account" (click)="submit()">Confirm</button>
                         </div>
                     </div>
                 </div>
