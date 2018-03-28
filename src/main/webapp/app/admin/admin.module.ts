@@ -4,6 +4,7 @@ import { JhiTrackerService } from './../shared/tracker/tracker.service';
 
 import { ArtonexpressSharedModule } from '../shared';
 /* jhipster-needle-add-admin-module-import - JHipster will add admin modules imports here */
+import { ImageUploadModule } from "angular2-image-upload";
 
 import {
     adminState,
@@ -84,6 +85,13 @@ import {
     PasswordComponent,
     SettingsComponent,
     AdminAccountPopupComponent,
+    AdminAdsComponent,
+    AdminAdsDeleteDialogComponent,
+    AdminAdsDeletePopupComponent,
+    AdminAdsDetailComponent,
+    AdminAdsDialogComponent,
+    AdminAdsPopupComponent,
+    AdminAdsResolvePagingParams
 } from './';
 import {AdminComponent} from './admin.component';
 import {MdButtonModule, MdCardModule, MdMenuModule} from '@angular/material';
@@ -98,6 +106,7 @@ import {PromotionService} from "../entities/promotion/promotion.service";
         RouterModule.forRoot(adminState, { useHash: true }),
         /* jhipster-needle-add-admin-module - JHipster will add admin modules here */
         MdButtonModule,
+        ImageUploadModule.forRoot(),
         MdCardModule,
         MdMenuModule
     ],
@@ -166,7 +175,13 @@ import {PromotionService} from "../entities/promotion/promotion.service";
         SearchFilterPipe,
         AdminAccountComponent,
         AdminAccountPopupComponent,
-        AdminAccountDialogComponent
+        AdminAccountDialogComponent,
+        AdminAdsComponent,
+        AdminAdsDeleteDialogComponent,
+        AdminAdsDeletePopupComponent,
+        AdminAdsDetailComponent,
+        AdminAdsDialogComponent,
+        AdminAdsPopupComponent
     ],
     entryComponents: [
         UserMgmtDialogComponent,
@@ -187,7 +202,9 @@ import {PromotionService} from "../entities/promotion/promotion.service";
         AdminReceiptDialogComponent,
         AdminServiceDeleteDialogComponent,
         AdminServiceDialogComponent,
-        AdminAccountDialogComponent
+        AdminAccountDialogComponent,
+        AdminAdsDeleteDialogComponent,
+        AdminAdsDialogComponent
     ],
     providers: [
         AuditsService,
@@ -206,6 +223,7 @@ import {PromotionService} from "../entities/promotion/promotion.service";
         AdminPromotionResolvePagingParams,
         AdminReceiptResolvePagingParams,
         AdminServiceResolvePagingParams,
+        AdminAdsResolvePagingParams,
         PasswordService,
         PromotionService
     ],

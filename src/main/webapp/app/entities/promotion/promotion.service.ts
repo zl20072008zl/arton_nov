@@ -79,10 +79,8 @@ export class PromotionService {
 
     private convert(promotion: Promotion): Promotion {
         const copy: Promotion = Object.assign({}, promotion);
-        copy.createdDate = this.dateUtils
-            .convertLocalDateToServer(promotion.createdDate);
-        copy.updatedDate = this.dateUtils
-            .convertLocalDateToServer(promotion.updatedDate);
+        copy.createdDate = new Date();
+        copy.updatedDate = new Date();
         copy.startDate = this.dateUtils
             .convertLocalDateToServer(promotion.startDate);
         copy.expiredDate = this.dateUtils

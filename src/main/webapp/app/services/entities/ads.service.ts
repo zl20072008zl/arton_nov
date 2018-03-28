@@ -3,18 +3,20 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { JhiDateUtils } from 'ng-jhipster';
 
-import { Promotion } from '../../entities/promotion/promotion.model';
+import { Ads } from '../../entities/ads/ads.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
 
 @Injectable()
-export class PromotionService {
+export class AdsService {
 
-    private resourceUrl = 'api/promotions';
+    private resourceUrl = 'api/ads';
+    private list     = 'api/ads/list';
+    public file: File;
 
     constructor(private http: Http, private dateUtils: JhiDateUtils) { }
 
-    create(promotion: Promotion): Observable<Promotion> {
-        const copy = this.convert(promotion, true);
+    create(ads: Ads): Observable<Ads> {
+        const copy = this.convert(ads,true);
         return this.http.post(this.resourceUrl, copy).map((res: Response) => {
             const jsonResponse = res.json();
             this.convertItemFromServer(jsonResponse);
@@ -22,8 +24,8 @@ export class PromotionService {
         });
     }
 
-    update(promotion: Promotion): Observable<Promotion> {
-        const copy = this.convert(promotion);
+    update(ads: Ads): Observable<Ads> {
+        const copy = this.convert(ads);
         return this.http.put(this.resourceUrl, copy).map((res: Response) => {
             const jsonResponse = res.json();
             this.convertItemFromServer(jsonResponse);
@@ -31,7 +33,7 @@ export class PromotionService {
         });
     }
 
-    find(id: number): Observable<Promotion> {
+    find(id: number): Observable<Ads> {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
             const jsonResponse = res.json();
             this.convertItemFromServer(jsonResponse);
@@ -39,15 +41,39 @@ export class PromotionService {
         });
     }
 
+    findAll(): Observable<any>{
+        return this.http.get(this.list)
+            .map((res) => {
+                return res.json().sort();
+            });
+    }
+
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
-        console.log(req);
         return this.http.get(this.resourceUrl, options)
             .map((res: Response) => this.convertResponse(res));
     }
 
     delete(id: number): Observable<Response> {
         return this.http.delete(`${this.resourceUrl}/${id}`);
+    }
+
+    fileChange(fileList: any): Promise<string> {
+        if(fileList.length > 0) {
+            let file: File = fileList[0];
+            let formData:FormData = new FormData();
+            // formData.append("id","666");
+            formData.append('uploadFile', file);
+            let headers = new Headers();
+            /** No need to include Content-Type in Angular 4 */
+            headers.append('Content-Type', 'multipart/form-data');
+            headers.append('Accept', 'application/json');
+
+
+            return this.http.post('/api/ads/uploadImage', formData, headers).toPromise().
+            then(res => res.json())
+                .catch(error => Observable.throw(error));
+        }
     }
 
     private convertResponse(res: Response): ResponseWrapper {
@@ -59,27 +85,19 @@ export class PromotionService {
     }
 
     private convertItemFromServer(entity: any) {
-        entity.createdDate = this.dateUtils
-            .convertLocalDateFromServer(entity.createdDate);
-        entity.updatedDate = this.dateUtils
-            .convertLocalDateFromServer(entity.updatedDate);
-        entity.startDate = this.dateUtils
-            .convertLocalDateFromServer(entity.startDate);
-        entity.expiredDate = this.dateUtils
-            .convertLocalDateFromServer(entity.expiredDate);
+        entity.createDate = this.dateUtils
+            .convertLocalDateFromServer(entity.createDate);
+        entity.updateDate = this.dateUtils
+            .convertLocalDateFromServer(entity.updateDate);
     }
 
-    private convert(promotion: Promotion, create?:boolean): Promotion {
-        const copy: Promotion = Object.assign({}, promotion);
+    private convert(ads: Ads, create?: boolean): Ads {
+        const copy: Ads = Object.assign({}, ads);
         if (create) {
-            copy.createdDate = new Date();
+            copy.createDate = new Date();
         }
 
-        copy.updatedDate = new Date();
-        copy.startDate = this.dateUtils
-            .convertLocalDateToServer(promotion.startDate);
-        copy.expiredDate = this.dateUtils
-            .convertLocalDateToServer(promotion.expiredDate);
+        copy.updateDate = new Date();
         return copy;
     }
 }

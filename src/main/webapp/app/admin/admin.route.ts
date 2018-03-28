@@ -21,7 +21,9 @@ import {
     receiptRoute,
     receiptPopupRoute,
     expressAccountRoute,
-    expressAccountPopupRoute
+    expressAccountPopupRoute,
+    adsRoute,
+    adsPopupRoute
 } from './';
 
 import { UserRouteAccessService } from '../shared';
@@ -49,7 +51,8 @@ const ADMIN_ROUTES = [
     passwordRoute,
     ...serviceRoute,
     ...labelRoute,
-    ...expressAccountRoute
+    ...expressAccountRoute,
+    ...adsRoute
 ];
 
 export const adminState: Routes = [{
@@ -69,5 +72,6 @@ export const adminState: Routes = [{
     ...receiptPopupRoute,
     ...servicePopupRoute,
     ...labelPopupRoute,
-    ...expressAccountPopupRoute
+    ...expressAccountPopupRoute,
+    ...adsPopupRoute
 ];
