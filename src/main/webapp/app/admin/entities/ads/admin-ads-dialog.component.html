@@ -1,0 +1,82 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myAdsLabel">Create or edit a Ads</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert></jhi-alert>
+        <div class="form-group" [hidden]="!ads.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="ads.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="ads.name" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_imagePath">Image Path</label>
+            <input type="text" class="form-control" name="imagePath" id="field_imagePath"
+                [(ngModel)]="ads.imagePath" readonly/>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                [(ngModel)]="ads.description"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_sort">Sort</label>
+            <input type="number" class="form-control" name="sort" id="field_sort"
+                [(ngModel)]="ads.sort"  />
+        </div>
+        <!--<div class="form-group">-->
+            <!--<label class="form-control-label" for="field_createDate">Create Date</label>-->
+            <!--<div class="input-group">-->
+                <!--<input id="field_createDate" type="text" class="form-control" name="createDate" ngbDatepicker  #createDateDp="ngbDatepicker" [(ngModel)]="ads.createDate"-->
+                <!--/>-->
+                <!--<span class="input-group-btn">-->
+                    <!--<button type="button" class="btn btn-default" (click)="createDateDp.toggle()"><i class="fa fa-calendar"></i></button>-->
+                <!--</span>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label class="form-control-label" for="field_updateDate">Update Date</label>-->
+            <!--<div class="input-group">-->
+                <!--<input id="field_updateDate" type="text" class="form-control" name="updateDate" ngbDatepicker  #updateDateDp="ngbDatepicker" [(ngModel)]="ads.updateDate"-->
+                <!--/>-->
+                <!--<span class="input-group-btn">-->
+                    <!--<button type="button" class="btn btn-default" (click)="updateDateDp.toggle()"><i class="fa fa-calendar"></i></button>-->
+                <!--</span>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="form-group">
+            <label class="form-control-label" for="field_activated">Activated</label>
+            <input type="checkbox" class="form-control" name="activated" id="field_activated"
+                [(ngModel)]="ads.activated"  />
+            <div [hidden]="!(editForm.controls.activated?.dirty && editForm.controls.activated?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.activated?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <image-upload [url]="''" [(ngModel]="selectedImage" [style]="'customStyle'" [buttonCaption]="'Select Image'" (change)="selectedFileOnChanged($event)" [uploadedFiles]="images"></image-upload>
+            <input type="button" value="upload" (click)="upload()"/>
+        </div>
+
+
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

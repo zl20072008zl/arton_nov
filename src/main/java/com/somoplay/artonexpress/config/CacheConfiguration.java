@@ -50,6 +50,7 @@ public class CacheConfiguration {
             cm.createCache(com.somoplay.artonexpress.domain.Order.class.getName(), jcacheConfiguration);
             cm.createCache(com.somoplay.artonexpress.domain.Item.class.getName(), jcacheConfiguration);
             cm.createCache(com.somoplay.artonexpress.domain.ExpressAccount.class.getName(), jcacheConfiguration);
+            cm.createCache(com.somoplay.artonexpress.domain.Ads.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

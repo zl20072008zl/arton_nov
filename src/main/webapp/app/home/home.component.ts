@@ -17,6 +17,7 @@ import {ShipmentRequest} from '../shipment/shipment.model';
 import {Address} from "../entities/address/address.model";
 import {Item} from "../entities/item/item.model";
 import {Service} from "../entities/service/service.model";
+import {AdsService} from "../services/entities/ads.service";
 
 @Component({
     selector: 'jhi-home',
@@ -35,6 +36,7 @@ export class HomeComponent implements OnInit {
     countries: any = [];
     states:any = [];
     senderStates:any = [];
+    AllAds:any = [];
 
     constructor(
         private principal: Principal,
@@ -46,6 +48,7 @@ export class HomeComponent implements OnInit {
         private localStorageService: LocalStorageService,
         private upsService: UpsService,
         private fedexService: FedexService,
+        private adsService: AdsService,
     ) {
     }
 
@@ -61,6 +64,7 @@ export class HomeComponent implements OnInit {
         this.registerAuthenticationSuccess();
         this.getCountries();
         this.getSenderStates();
+        this.getAllAds();
     }
 
     registerAuthenticationSuccess() {
@@ -157,5 +161,9 @@ export class HomeComponent implements OnInit {
         this.rates.sender.countryCode = 'CA';
         this.rates.parcel.type = 'Customer Package';
         this.rates.parcel.unit = 'KGS';
+    }
+
+    getAllAds(){
+        this.adsService.findAll().subscribe((AllAds) => this.AllAds = AllAds);
     }
 }

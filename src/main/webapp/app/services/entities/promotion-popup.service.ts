@@ -22,20 +22,20 @@ export class PromotionPopupService {
 
         if (id) {
             this.promotionService.find(id).subscribe((promotion) => {
-                if (promotion.createdDate) {
-                    promotion.createdDate = {
-                        year: promotion.createdDate.getFullYear(),
-                        month: promotion.createdDate.getMonth() + 1,
-                        day: promotion.createdDate.getDate()
-                    };
-                }
-                if (promotion.updatedDate) {
-                    promotion.updatedDate = {
-                        year: promotion.updatedDate.getFullYear(),
-                        month: promotion.updatedDate.getMonth() + 1,
-                        day: promotion.updatedDate.getDate()
-                    };
-                }
+                // if (promotion.createdDate) {
+                //     promotion.createdDate = {
+                //         year: promotion.createdDate.getFullYear(),
+                //         month: promotion.createdDate.getMonth() + 1,
+                //         day: promotion.createdDate.getDate()
+                //     };
+                // }
+                // if (promotion.updatedDate) {
+                //     promotion.updatedDate = {
+                //         year: promotion.updatedDate.getFullYear(),
+                //         month: promotion.updatedDate.getMonth() + 1,
+                //         day: promotion.updatedDate.getDate()
+                //     };
+                // }
                 if (promotion.startDate) {
                     promotion.startDate = {
                         year: promotion.startDate.getFullYear(),

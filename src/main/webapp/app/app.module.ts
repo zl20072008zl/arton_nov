@@ -46,6 +46,8 @@ import {ReceiptPopupService} from './services/entities/receipt-popup.service';
 import {PromotionPopupService} from './services/entities/promotion-popup.service';
 import {LabelService} from './services/entities/label.service';
 import {ExpressAccountService} from "./services/entities/express-account.service";
+import {AdsService} from "./services/entities/ads.service";
+import {AdsPopupService} from "./services/entities/ads-popup.service";
 
 @NgModule({
     imports: [
@@ -90,7 +92,9 @@ import {ExpressAccountService} from "./services/entities/express-account.service
         PromotionPopupService,
         MonerisService,
         LabelService,
-        ExpressAccountService
+        ExpressAccountService,
+        AdsService,
+        AdsPopupService
     ],
     bootstrap: [ JhiMainComponent ]
 })

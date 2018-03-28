@@ -3,8 +3,8 @@ import { BaseEntity } from './../../shared';
 export class Promotion implements BaseEntity {
     constructor(
         public id?: number,
-        public createdDate?: any,
-        public updatedDate?: any,
+        public createdDate?: Date,
+        public updatedDate?: Date,
         public name?: string,
         public description?: string,
         public percentageOff?: number,

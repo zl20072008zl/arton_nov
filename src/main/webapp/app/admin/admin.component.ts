@@ -67,6 +67,12 @@ export class AdminComponent implements OnInit {
             icon : 'fa-tag',
             admin : true
         },
+        {
+            link : 'ads',
+            name : 'Image',
+            icon : 'fa-image',
+            admin : true
+        },
         // {
         //     link : 'account',
         //     name : 'Account',
