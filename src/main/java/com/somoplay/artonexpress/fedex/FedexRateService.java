@@ -64,7 +64,7 @@ public class FedexRateService {
         Address shipperAddress = new Address(); // Origin information
         if (shipmentRequest.getSender().getAddress2() != null) {
             shipperAddress.setStreetLines(new String[] {shipmentRequest.getSender().getAddress1(), shipmentRequest.getSender().getAddress2()});
-        } else {
+        } else if(shipmentRequest.getSender().getAddress1() != null){
             shipperAddress.setStreetLines(new String[] {shipmentRequest.getSender().getAddress1()});
         }
         shipperAddress.setCity(shipmentRequest.getSender().getCity());
@@ -79,7 +79,7 @@ public class FedexRateService {
         Address recipientAddress = new Address(); // Destination information
         if (shipmentRequest.getRecipient().getAddress2() != null) {
             recipientAddress.setStreetLines(new String[] {shipmentRequest.getRecipient().getAddress1(), shipmentRequest.getRecipient().getAddress2()});
-        } else {
+        } else if(shipmentRequest.getRecipient().getAddress1() != null){
             recipientAddress.setStreetLines(new String[] {shipmentRequest.getRecipient().getAddress1()});
         }
         recipientAddress.setCity(shipmentRequest.getRecipient().getCity());

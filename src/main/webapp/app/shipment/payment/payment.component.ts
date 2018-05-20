@@ -3,13 +3,14 @@ import {LocalStorageService} from 'ng2-webstorage';
 import {OrderService} from '../../services/entities/order.service';
 import {CpService} from '../../services/cp/cp.service';
 import {MonerisService} from '../../services/moneris.service';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import {ReceiptService} from '../../services/entities/receipt.service';
 import {LabelService} from '../../services/entities/label.service';
 import {UpsService} from '../../services/ups/ups.service';
 import {FedexService} from '../../services/fedex/fedex.service';
 import {PromotionService} from "../../entities/promotion/promotion.service";
 import {Promotion} from "../../entities/promotion/promotion.model";
+import {PaypalService} from "../../services/paypal.service";
 
 @Component({
     selector: 'shipment-payment-component',
@@ -31,27 +32,31 @@ export class ShipmentPaymentComponent implements OnInit {
     };
     public months: any = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
     public years: any = ['17', '18', '19', '20', '21', '22', '23', '24', '25', '26'];
-    public paymentTypes: any = ['Credit Card', 'Account'];
+    public paymentTypes: any = ['Credit Card', 'Account', 'PayPal'];
 
     constructor(
         private localSt: LocalStorageService,
         private orderService: OrderService,
         private cpService: CpService,
         private moneris: MonerisService,
+        private paypal: PaypalService,
         private router: Router,
         private receiptService: ReceiptService,
         private labelService: LabelService,
         private upsService: UpsService,
         private fedexService: FedexService,
+        private activatedRoute: ActivatedRoute,
         private promotionService: PromotionService
     ) { }
 
     ngOnInit() {
         this.finalPrice = parseFloat(this.request.order.totalCharges).toFixed(2);
         this.selectPromotion();
+        this.fromPaypal();
     }
 
     submit() {
+
         if(this.paymentType == 'Account'){
             this.completeOrder(null);
         }else
@@ -72,24 +77,53 @@ export class ShipmentPaymentComponent implements OnInit {
                         this.completeOrder(res);
                     }
                 });
+        }else
+        if(this.paymentType == 'PayPal'){
+            this.paypal.getPurchase(this.finalPrice).subscribe((res) => {
+                window.location.href = res.redirect_url;
+            });
         }
     }
 
-    selectPromotion() {
-        this.promotionService.find(this.request.user.promotionId).subscribe((promotion) => {
-            this.request.order.promotion = new Promotion();
-            this.request.promotion = new Promotion();
-            if(promotion.startDate < new Date() && promotion.expiredDate > new Date()){
-                this.request.order.promotion = promotion;
-                this.request.order.promotionId = promotion.id;
-                this.request.promotion = promotion;
+    fromPaypal(){
+        this.activatedRoute.queryParams.subscribe(params => {
+            let paymentId = params['paymentId'];
+            let PayerID = params['PayerID'];
+            if(paymentId&&PayerID){
+                this.completePaypal(paymentId, PayerID);
             }
-            else{
-                this.request.promotion.name = "No Promotion";
-                this.request.promotion.percentageOff = 100;
-            }
-            this.finalPrice = (parseFloat(this.finalPrice) - parseFloat(this.finalPrice) * this.request.promotion.percentageOff / 100).toFixed(2);
         });
+    }
+    completePaypal(paymentId, PayerID){
+        document.getElementById('load-animation').style.display='block';
+        document.getElementById('bg').style.display='block';
+        this.paypal.completePayment(paymentId,PayerID).subscribe((res) => {
+            if(res.status){
+                this.completeOrder(res);
+            }
+        });
+    }
+
+    selectPromotion() {
+        if(!this.request.user.promotionId){
+            this.request.promotion.name = "No Promotion";
+            this.request.promotion.percentageOff = 100;
+        }else{
+            this.promotionService.find(this.request.user.promotionId).subscribe((promotion) => {
+                this.request.order.promotion = new Promotion();
+                this.request.promotion = new Promotion();
+                if(promotion.startDate < new Date() && promotion.expiredDate > new Date()){
+                    this.request.order.promotion = promotion;
+                    this.request.order.promotionId = promotion.id;
+                    this.request.promotion = promotion;
+                    this.finalPrice = (parseFloat(this.finalPrice) * (this.request.promotion.percentageOff / 100)).toFixed(2);
+                }
+                else{
+                    this.request.promotion.name = "No Promotion";
+                    this.request.promotion.percentageOff = 100;
+                }
+            });
+        }
     }
 
     completeOrder(res){
@@ -104,7 +138,7 @@ export class ShipmentPaymentComponent implements OnInit {
                             (data) => {
                                 this.request.label.link = data.labelLink;
                                 this.request.label.shipmentId = data.shipmentId;
-                                this.request.label.shipmentStatus = data.shipmentStatus;
+                                this.request.label.shipmentStatus = 'Completed';
                                 this.request.label.trackingNumber = data.trackingNumber;
                                 delete this.request.label.id;
 

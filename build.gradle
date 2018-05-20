@@ -257,6 +257,7 @@ dependencies {
 
     compile fileTree(dir: 'src/main/resources/jar', include: '*.jar')
 
+    compile group: 'com.paypal.sdk', name: 'rest-api-sdk', version: '1.14.0'
 }
 
 // the whole dependency container could be left out

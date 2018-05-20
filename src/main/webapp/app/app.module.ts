@@ -48,6 +48,7 @@ import {LabelService} from './services/entities/label.service';
 import {ExpressAccountService} from "./services/entities/express-account.service";
 import {AdsService} from "./services/entities/ads.service";
 import {AdsPopupService} from "./services/entities/ads-popup.service";
+import {PaypalService} from "./services/paypal.service";
 
 @NgModule({
     imports: [
@@ -91,6 +92,7 @@ import {AdsPopupService} from "./services/entities/ads-popup.service";
         ReceiptPopupService,
         PromotionPopupService,
         MonerisService,
+        PaypalService,
         LabelService,
         ExpressAccountService,
         AdsService,

@@ -51,6 +51,8 @@ export class ShipmentServiceComponent implements OnInit, DoCheck {
                 if (this.request.service.code) {
                     this.selectedService = this.services.filter((v) => v.code == this.request.service.code)[0];
                 }
+                document.getElementById('load-animation').style.display='none';
+                document.getElementById('bg').style.display='none';
             },
             (err) => console.error(err)
         );

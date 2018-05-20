@@ -105,7 +105,11 @@ export class HomeComponent implements OnInit {
 
     getRates() {
         // if (this.isAuthenticated()) {
-            Observable.forkJoin(
+        if(this.rates.sender.postalCode && this.rates.recipient.country && this.rates.recipient.postalCode && this.rates.parcel.weight){
+            document.getElementById('load-animation').style.display='block';
+            document.getElementById('bg').style.display='block';
+        }
+        Observable.forkJoin(
                 this.cpService.getCpRates(this.rates),
                 //this.upsService.getTnt(this.rates),
                 this.fedexService.getRate(this.rates)
