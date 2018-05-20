@@ -2,8 +2,8 @@
     <ng-template ngbSlide *ngFor="let ads of AllAds">
         <img src="{{ads.imagePath}}" alt="Random first slide" style="width: 100%">
         <div class="carousel-caption">
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            <h3>{{ads.name}}</h3>
+            <p>{{ads.description}}</p>
         </div>
     </ng-template>
     <!--<ng-template ngbSlide>-->
@@ -22,6 +22,14 @@
     <!--</ng-template>-->
 </ngb-carousel>
 <hr>
+<div id="bg" style="background-color: #ccc;display:none; width: 100%;position:absolute;height: 100%;opacity: 0.4;z-index: 999; top:0; left:0;"></div>
+<div class="loading" id="load-animation" style="z-index:9999;display:none;position:absolute;top:50%; left:50%;">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
 <div class="container">
     <section style="margin-bottom:3px;">
         <div class="row">
@@ -57,21 +65,21 @@
                                 <input class="form-control" type="text" name="from_country" [(ngModel)]="rates.sender.country"  readonly="">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <label class="input-group-addon" for="from_Province">State Or Province</label>
-                                <select class="form-control" name="from_Province" id="from_Province" [(ngModel)]="rates.sender.province"
-                                        (change)="setProvinceCode('sender')">
-                                    <option *ngFor="let state of senderStates" [value]="state.name">{{state.name}}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-addon"><span>Address</span></div>
-                                <input class="form-control" type="text" name="from_address" required="" [(ngModel)]="rates.sender.address1"  placeholder="Address">
-                            </div>
-                        </div>
+                        <!--<div class="form-group">-->
+                            <!--<div class="input-group">-->
+                                <!--<label class="input-group-addon" for="from_Province">State Or Province</label>-->
+                                <!--<select class="form-control" name="from_Province" id="from_Province" [(ngModel)]="rates.sender.province"-->
+                                        <!--(change)="setProvinceCode('sender')">-->
+                                    <!--<option *ngFor="let state of senderStates" [value]="state.name">{{state.name}}</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<div class="input-group">-->
+                                <!--<div class="input-group-addon"><span>Address</span></div>-->
+                                <!--<input class="form-control" type="text" name="from_address" [(ngModel)]="rates.sender.address1"  placeholder="Address">-->
+                            <!--</div>-->
+                        <!--</div>-->
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-addon"><span>Postal Code</span></div>
@@ -88,27 +96,27 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <label class="input-group-addon" for="recipient_country">Country</label>
-                                <select class="form-control" name="recipient_country" id="recipient_country" [(ngModel)]="rates.recipient.country"
+                                <select class="form-control" name="recipient_country" id="recipient_country"  required="" [(ngModel)]="rates.recipient.country"
                                         (change)="setCountryCode()" *ngIf="countries.length > 0">
                                     <option *ngFor="let country of countries" [value]="country.name">{{country.name}}</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <label class="input-group-addon" for="recipient_Province">State Or Province</label>
-                                <select class="form-control" name="recipient_Province" id="recipient_Province" [(ngModel)]="rates.recipient.province"
-                                        (change)="setProvinceCode('recipient')">
-                                    <option *ngFor="let state of states" [value]="state.name">{{state.name}}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-addon"><span>Address</span></div>
-                                <input class="form-control" type="text" name="to_address" required="" [(ngModel)]="rates.recipient.address1"  placeholder="Address">
-                            </div>
-                        </div>
+                        <!--<div class="form-group">-->
+                            <!--<div class="input-group">-->
+                                <!--<label class="input-group-addon" for="recipient_Province">State Or Province</label>-->
+                                <!--<select class="form-control" name="recipient_Province" id="recipient_Province" [(ngModel)]="rates.recipient.province"-->
+                                        <!--(change)="setProvinceCode('recipient')">-->
+                                    <!--<option *ngFor="let state of states" [value]="state.name">{{state.name}}</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<div class="input-group">-->
+                                <!--<div class="input-group-addon"><span>Address</span></div>-->
+                                <!--<input class="form-control" type="text" name="to_address" [(ngModel)]="rates.recipient.address1"  placeholder="Address">-->
+                            <!--</div>-->
+                        <!--</div>-->
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-addon"><span>Postal Code</span></div>
@@ -143,35 +151,35 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-addon"><span>Declared Value: $</span></div>
-                                <input class="form-control" type="text" name="value" [(ngModel)]="rates.parcel.value">
-                            </div>
-                        </div>
+                        <!--<div class="form-group">-->
+                            <!--<div class="input-group">-->
+                                <!--<div class="input-group-addon"><span>Declared Value: $</span></div>-->
+                                <!--<input class="form-control" type="text" name="value" [(ngModel)]="rates.parcel.value">-->
+                            <!--</div>-->
+                        <!--</div>-->
                     </fieldset>
                 </form>
             </div>
         </div>
         <div class="row" style="margin-top:20px;margin-bottom:0px;">
-            <div class="col-md-6">
-                <button class="btn btn-success btn-block" type="button" (click)="getRates()">Rate </button>
+            <div class="col-md-6" style="opacity: 0.6">
+                <button class="btn btn-warning btn-block" type="reset" (click)="reset()">Reset </button>
             </div>
             <div class="col-md-6">
-                <button class="btn btn-warning btn-block" type="reset" (click)="reset()">Reset </button>
+                <button class="btn btn-success btn-block" type="button" (click)="getRates()">Rate </button>
             </div>
         </div>
     </section>
 </div>
 <hr>
-<div class="highlight-clean">
-    <div class="container">
-        <div class="intro">
-            <h2 class="text-center">Highlight</h2>
-            <p class="text-center">Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh erat, pellentesque ut laoreet vitae. </p>
-        </div>
-        <div class="buttons"><a class="btn btn-primary" role="button" href="#">Primary</a>
-            <button class="btn btn-default" type="button">Secondary</button>
-        </div>
-    </div>
-</div>
+<!--<div class="highlight-clean">-->
+    <!--<div class="container">-->
+        <!--<div class="intro">-->
+            <!--<h2 class="text-center">Highlight</h2>-->
+            <!--<p class="text-center">Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh erat, pellentesque ut laoreet vitae. </p>-->
+        <!--</div>-->
+        <!--<div class="buttons"><a class="btn btn-primary" role="button" href="#">Primary</a>-->
+            <!--<button class="btn btn-default" type="button">Secondary</button>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->

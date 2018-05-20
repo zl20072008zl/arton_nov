@@ -1,3 +1,11 @@
+<div id="bg" style="background-color: #ccc;display:none; width: 100%;position:absolute;height: 100%;opacity: 0.4;z-index: 999; top:0; left:0;"></div>
+<div class="loading" id="load-animation" style="z-index:9999;display:none;position:absolute;top:50%; left:50%;">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
 <div class="tab-content" style="margin: 20px;">
     <div class="row">
         <div class="col-sm-2"></div>
@@ -35,6 +43,12 @@
                                         <span>{{request.user.paymentType}}</span>
                                     </div>
                                     <div *ngIf="request.user.paymentType == 'Account'">
+                                        <div *ngFor="let type of paymentTypes">
+                                            <input type="radio" [(ngModel)]="paymentType" [value]="type">
+                                            <span>{{type}}</span>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="request.user.paymentType == 'PayPal'">
                                         <div *ngFor="let type of paymentTypes">
                                             <input type="radio" [(ngModel)]="paymentType" [value]="type">
                                             <span>{{type}}</span>
@@ -105,6 +119,28 @@
                     <div class="payment"style="width:100%">
                         <div class="form-group" id="pay-now-account"style="width:100%">
                             <button type="submit" class="btn btn-default" id="confirm-purchase-account" (click)="submit()">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+
+    <div class="row" *ngIf="paymentType == 'PayPal'">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <div class="container-fluid">
+                <div class="creditCardForm" *ngIf="payment">
+                    <div class="heading">
+                        <h1>Confirm Purchase</h1>
+                    </div>
+                    <div class="payment"style="width:100%">
+                        <div class="form-group" id="pay-now-account"style="width:100%">
+                            <button type="submit" style="background-color: white" class="btn btn-default" id="confirm-purchase-account" (click)="submit()">
+                                <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-large.png" alt="Check out with PayPal" />
+                            </button>
+
                         </div>
                     </div>
                 </div>

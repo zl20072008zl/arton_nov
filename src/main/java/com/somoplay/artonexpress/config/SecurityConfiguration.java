@@ -108,6 +108,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/fedex/rate").permitAll()
             .antMatchers("/api/canadapost/rate").permitAll()
             .antMatchers("/api/ads/uploadImage").permitAll()
+            .antMatchers("/api/ads/list").permitAll()
             .antMatchers("/api/**").authenticated()
             .antMatchers("/websocket/tracker").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/websocket/**").permitAll()
